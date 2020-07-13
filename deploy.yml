@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      env: php
+  template:
+    metadata:
+      name: php-pod
+      labels:
+        env: php
+    spec:
+      containers:
+      - name: php-con
+        image: charuchandak/php-webserver:v2
+        ports:
+          - containerPort: 80
+        volumeMounts:
+          - mountPath: /etc/httpd/logs
+            name: php-storage
+
+      volumes:
+      - name: php-storage
+        persistentVolumeClaim:
+          claimName: myphp-pv-claim
+        
