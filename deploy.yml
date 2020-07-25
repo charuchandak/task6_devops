@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
       - name: php-con
-        image: charuchandak/php-webserver:v2
+        image: vimal13/apache-webserver-php
+
         ports:
           - containerPort: 80
         volumeMounts:
